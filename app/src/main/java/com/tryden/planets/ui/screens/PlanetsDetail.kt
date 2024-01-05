@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -54,9 +55,11 @@ fun PlanetsDetail(
                 )
         ) {
             Box {
-                Box {
+                Box(
+                   Modifier.background(color = colorResource(id = R.color.black))
+                ){
                     Image(
-                        painter = painterResource(id = selectedPlanet.planetsImageBanner),
+                        painter = painterResource(id = selectedPlanet.imageResourceId),
                         contentDescription = null,
                         alignment = Alignment.TopCenter,
                         contentScale = ContentScale.FillWidth

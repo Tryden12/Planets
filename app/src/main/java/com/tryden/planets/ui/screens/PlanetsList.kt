@@ -41,8 +41,11 @@ fun PlanetsList(
 ) {
     LazyColumn(
         contentPadding = contentPadding,
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
-        modifier = modifier
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
+        modifier = modifier.padding(
+            top = dimensionResource(R.dimen.padding_medium),
+            bottom = dimensionResource(R.dimen.padding_medium)
+        ),
     ) {
         items(planets, key = { planet -> planet.id}) { planet ->
             PlanetsListItem(

@@ -28,7 +28,7 @@ fun PlanetsAppBar(
     windowSize: WindowWidthSizeClass,
     modifier: Modifier = Modifier
 ) {
-    val isShowingDetailPage = windowSize != WindowWidthSizeClass.Expanded
+    val isShowingDetailPage = windowSize != WindowWidthSizeClass.Expanded && !isShowingListPage
     TopAppBar(
         title = {
             Text(
