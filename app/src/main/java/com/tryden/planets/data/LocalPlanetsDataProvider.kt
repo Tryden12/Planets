@@ -4,7 +4,7 @@ import com.tryden.planets.R
 import com.tryden.planets.model.Planet
 
 /**
- * Planets data
+ * Using local Planets data for simplicity to showcase UI fundamentals.
  */
 object LocalPlanetsDataProvider {
     val defaultPlanet = getPlanetsData()[0]
