@@ -1,10 +1,13 @@
 package com.tryden.planets.ui
 
-import com.tryden.planets.data.LocalPlanetsDataProvider
-import com.tryden.planets.model.PlanetLocal
+import com.tryden.planets.data.remote.dto.PlanetResponse
 
-data class PlanetsUiState(
-    val planetsList: List<PlanetLocal> = emptyList(),
-    val currentPlanetLocal: PlanetLocal = LocalPlanetsDataProvider.defaultPlanet,
-    val isShowingListPage: Boolean = true
-)
+interface PlanetsUiState {
+    data class Success(
+        val planets: List<PlanetResponse>,
+        var currentPlanet: PlanetResponse,
+        val isShowingListPage: Boolean = true
+    ): PlanetsUiState
+    object Error: PlanetsUiState
+    object Loading: PlanetsUiState
+}

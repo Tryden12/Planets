@@ -5,7 +5,11 @@ import com.tryden.planets.data.NetworkPlanetsRepository
 import com.tryden.planets.data.PlanetsRepository
 import com.tryden.planets.network.PlanetsApiService
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import retrofit2.Retrofit
 
 /**
@@ -21,7 +25,7 @@ interface AppContainer {
  * Variables are initialized lazily and the same instance is shared across the whole app.
  */
 class DefaultAppContainer: AppContainer {
-    private val baseUrl = "https://planets-info-by-newbapi.p.rapidapi.com/api/v1/planets/"
+    private val baseUrl = "https://planets-info-by-newbapi.p.rapidapi.com/api/v1/"
 
     /**
      * Use the Retrofit builder to build a retrofit object using a kotlinx.serialization converter
@@ -30,6 +34,7 @@ class DefaultAppContainer: AppContainer {
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
         .baseUrl(baseUrl)
         // todo: add headers: api key, host
+        .client(client)
         .build()
 
 
@@ -55,9 +60,21 @@ class DefaultAppContainer: AppContainer {
 
 
 
-// OkHttp:
-//val client = OkHttpClient()
-//
+// OkHttp
+val client = OkHttpClient.Builder()
+    .addInterceptor { chain -> return@addInterceptor addHeadersToRequests(chain) }
+    .build()
+private fun addHeadersToRequests(chain: Interceptor.Chain): Response {
+    val request = chain.request().newBuilder()
+    val originalHttpUrl = chain.request().url
+    val newUrl = originalHttpUrl.newBuilder()
+        .addQueryParameter("X-RapidAPI-Key", "13a44ed739msh8578ea5034fbd7cp1e5572jsn3c5106c8b3a6")
+        .addQueryParameter("X-RapidAPI-Host", "planets-info-by-newbapi.p.rapidapi.com")
+        .build()
+    request.url(newUrl)
+    return chain.proceed(request.build())
+}
+
 //val request = Request.Builder()
 //    .url("https://planets-info-by-newbapi.p.rapidapi.com/api/v1/planets/")
 //    .get()

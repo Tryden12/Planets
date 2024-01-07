@@ -1,6 +1,5 @@
 package com.tryden.planets.ui.screens.list
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,24 +17,22 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.compose.PlanetsTheme
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.tryden.planets.R
-import com.tryden.planets.data.LocalPlanetsDataProvider
-import com.tryden.planets.model.PlanetLocal
+import com.tryden.planets.data.remote.dto.PlanetResponse
 
 @Composable
 fun PlanetsList(
-    planetLocals: List<PlanetLocal>,
-    onClick: (PlanetLocal) -> Unit,
+    planets: List<PlanetResponse>,
+    onClick: (PlanetResponse) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -47,9 +44,9 @@ fun PlanetsList(
             bottom = dimensionResource(R.dimen.padding_medium)
         ),
     ) {
-        items(planetLocals, key = { planet -> planet.id}) { planet ->
+        items(planets, key = { planet -> planet.id}) { planet ->
             PlanetsListItem(
-                planetLocal = planet,
+                planet = planet,
                 onItemClick = onClick
             )
         }
@@ -59,15 +56,15 @@ fun PlanetsList(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlanetsListItem(
-    planetLocal: PlanetLocal,
-    onItemClick: (PlanetLocal) -> Unit,
+    planet: PlanetResponse,
+    onItemClick: (PlanetResponse) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         elevation = CardDefaults.cardElevation(),
         modifier = modifier,
         shape = RoundedCornerShape(dimensionResource(R.dimen.card_corner_radius)),
-        onClick = { onItemClick(planetLocal) }
+        onClick = { onItemClick(planet) }
     ) {
         Row(
             modifier = Modifier
@@ -79,7 +76,7 @@ fun PlanetsListItem(
                     .weight(1f)
             ){
                 PlanetsListImageItem(
-                    planetLocal = planetLocal,
+                    planet = planet,
                     modifier = Modifier.size(dimensionResource(R.dimen.card_image_height))
                 )
             }
@@ -92,12 +89,12 @@ fun PlanetsListItem(
                     .weight(1f)
             ) {
                 Text(
-                    text = stringResource(planetLocal.titleResourceId),
+                    text = planet.name,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(bottom = dimensionResource(R.dimen.card_text_vertical_space))
                 )
                 Text(
-                    text = stringResource(planetLocal.subtitleResourceId),
+                    text = planet.description,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.secondary,
                     overflow = TextOverflow.Ellipsis,
@@ -109,28 +106,46 @@ fun PlanetsListItem(
 }
 
 @Composable
-private fun PlanetsListImageItem(planetLocal: PlanetLocal, modifier: Modifier = Modifier) {
+private fun PlanetsListImageItem(planet: PlanetResponse, modifier: Modifier = Modifier) {
     Box(modifier = Modifier) {
-        Image(
-            painter = painterResource(id = planetLocal.imageResourceId),
-            contentDescription = null,
-            alignment = Alignment.Center,
-            contentScale = ContentScale.FillWidth
-        )
+//        Image(
+//            painter = painterResource(id = planetLocal.imageResourceId),
+//            contentDescription = null,
+//            alignment = Alignment.Center,
+//            contentScale = ContentScale.FillWidth
+//        )
+        Card(
+            modifier = modifier,
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        ) {
+            AsyncImage(
+                model = ImageRequest.Builder(context = LocalContext.current)
+                    .data(planet.imgSrc)
+                    .crossfade(true)
+                    .build(),
+                contentScale = ContentScale.Crop,
+                contentDescription = planet.description,
+                error = painterResource(id = R.drawable.ic_broken_image),
+                placeholder = painterResource(id = R.drawable.loading_img),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
 
-@Preview
-@Composable
-fun PlanetsListItemPreview() {
-    PlanetsTheme {
-        PlanetsListItem(
-            planetLocal = LocalPlanetsDataProvider.defaultPlanet,
-            onItemClick = {}
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun PlanetsListItemPreview() {
+//    PlanetsTheme {
+//        PlanetsListItem(
+//            planet = Planet (
+//                // todo
+//            ),
+//            onItemClick = {}
+//        )
+//    }
+//}
 
 //@Preview
 //@Composable

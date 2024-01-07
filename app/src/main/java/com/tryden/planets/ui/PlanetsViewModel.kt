@@ -9,9 +9,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.tryden.planets.PlanetsApplication
-import com.tryden.planets.data.LocalPlanetsDataProvider
+import com.tryden.planets.data.local.LocalPlanetsDataProvider
 import com.tryden.planets.data.PlanetsRepository
-import com.tryden.planets.model.PlanetLocal
+import com.tryden.planets.domain.PlanetLocal
 import com.tryden.planets.ui.screens.detail.PlanetDetailUiState
 import com.tryden.planets.ui.screens.list.PlanetsListUiState
 import com.tryden.planets.ui.screens.listAndDetail.PlanetListAndDetailUiState
@@ -44,6 +44,10 @@ class PlanetsViewModel(
     }
 
     /** The mutable State that stores the status of the most recent request */
+
+//    private val _planetsUiState = MutableStateFlow(PlanetsUiState.Loading)
+//    val planetsUiState: StateFlow<PlanetsUiState> = _planetsUiState
+
     var planetsListUiState: PlanetsListUiState by mutableStateOf(PlanetsListUiState.Loading)
         private set
 
@@ -59,11 +63,11 @@ class PlanetsViewModel(
     /**
      * Call getAllPlanets() on init so we can display status immediately.
      */
-//    init {
-//        getAllPlanets()
-//
-//        // TODO: add getPlanet() if PlanetListAndDetailScreen is showing
-//    }
+    init {
+        getAllPlanets()
+
+        // TODO: add getPlanet() if PlanetListAndDetailScreen is showing
+    }
 
     /**
      * Gets planets information from the Planets API Retrofit service and updates the
@@ -73,12 +77,14 @@ class PlanetsViewModel(
         viewModelScope.launch {
             planetsListUiState = PlanetsListUiState.Loading
             planetsListUiState = try {
-                PlanetsListUiState.Success(planetsRepository.getAllPlanets())
+                val planets = planetsRepository.getAllPlanets()
+                PlanetsListUiState.Success(planets)
             } catch (e: IOException) {
                 PlanetsListUiState.Error
             } catch (e: HttpException) {
                 PlanetsListUiState.Error
             }
+
         }
     }
 
@@ -103,18 +109,18 @@ class PlanetsViewModel(
     /**
      * Deprecated: PlanetsViewModel utilizing LocalPlanetsDataProvider
      */
-    private val _uiState = MutableStateFlow(
-        PlanetsUiState(
+    private val _uiStateOld = MutableStateFlow(
+        PlanetsUiStateOld(
             planetsList = LocalPlanetsDataProvider.getPlanetsData(),
             currentPlanetLocal = LocalPlanetsDataProvider.getPlanetsData().getOrElse(0) {
                 LocalPlanetsDataProvider.defaultPlanet
             }
         )
     )
-    val uiState: StateFlow<PlanetsUiState> = _uiState
+    val uiStateOld: StateFlow<PlanetsUiStateOld> = _uiStateOld
 
     fun updateCurrentPlanet(selectedPlanetLocal: PlanetLocal) {
-        _uiState.update {
+        _uiStateOld.update {
             it.copy(
                 currentPlanetLocal = selectedPlanetLocal
             )
@@ -122,13 +128,13 @@ class PlanetsViewModel(
     }
 
     fun navigateToListPage() {
-        _uiState.update {
+        _uiStateOld.update {
             it.copy(isShowingListPage = true)
         }
     }
 
     fun navigateToDetailPage() {
-        _uiState.update {
+        _uiStateOld.update {
             it.copy(isShowingListPage = false)
         }
     }

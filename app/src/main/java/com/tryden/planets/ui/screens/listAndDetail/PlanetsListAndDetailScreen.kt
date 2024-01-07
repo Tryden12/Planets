@@ -12,8 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose.PlanetsTheme
 import com.tryden.planets.R
-import com.tryden.planets.data.LocalPlanetsDataProvider
-import com.tryden.planets.model.PlanetLocal
+import com.tryden.planets.data.local.LocalPlanetsDataProvider
+import com.tryden.planets.domain.PlanetLocal
 import com.tryden.planets.ui.screens.detail.PlanetsDetail
 import com.tryden.planets.ui.screens.list.PlanetsList
 

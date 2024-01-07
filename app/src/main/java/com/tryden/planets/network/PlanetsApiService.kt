@@ -1,6 +1,7 @@
 package com.tryden.planets.network
 
-import com.tryden.planets.model.Planet
+import com.tryden.planets.data.remote.dto.PlanetResponse
+import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -9,15 +10,15 @@ import retrofit2.http.GET
 interface PlanetsApiService {
 
     /**
-     * Returns a [List] of [Planet] and this method can be called from a Coroutine.
+     * Returns a [List] of [PlanetResponse] and this method can be called from a Coroutine.
      */
-    @GET
-    suspend fun getAllPlanets(): List<Planet>
+    @GET("planets")
+    suspend fun getAllPlanets(): Response<List<PlanetResponse>>
 
     /**
-     * Returns a [Planet] and this method can be called from a Coroutine.
+     * Returns a [PlanetResponse] and this method can be called from a Coroutine.
      * The @GET annotation parameter [id] indicates the planet id.
      */
     @GET("id")
-    suspend fun getPlanet(): Planet
+    suspend fun getPlanet(id: Int): Response<PlanetResponse>
 }
