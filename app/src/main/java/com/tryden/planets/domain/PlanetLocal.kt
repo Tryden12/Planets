@@ -1,4 +1,4 @@
-package com.tryden.planets.model
+package com.tryden.planets.domain
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
