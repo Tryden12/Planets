@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Planets</string>
 
+    <string name="loading_failed">Failed to load</string>
+    <string name="retry">Retry</string>
+    <string name="loading">Loading</string>
+
     <string name="back_button">Back</string>
 
     <!-- fragment labels for navigation -->
