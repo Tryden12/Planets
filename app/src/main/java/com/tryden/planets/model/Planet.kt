@@ -1,13 +1,12 @@
 package com.tryden.planets.model
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-
 data class Planet(
+    val basicDetails: BasicDetails,
+    val description: String,
     val id: Int,
-    @StringRes val titleResourceId: Int,
-    @StringRes val subtitleResourceId: Int,
-    @DrawableRes val imageResourceId: Int,
-    @DrawableRes val planetsImageBanner: Int,
-    @StringRes val planetDetails: Int
+    val imgSrc: ImgSrc,
+    val name: String,
+    val planetOrder: Int,
+    val source: String,
+    val wikiLink: String
 )

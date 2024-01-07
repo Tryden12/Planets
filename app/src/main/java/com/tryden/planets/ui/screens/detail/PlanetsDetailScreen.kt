@@ -1,4 +1,4 @@
-package com.tryden.planets.ui.screens
+package com.tryden.planets.ui.screens.detail
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -26,12 +26,12 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.tryden.planets.R
-import com.tryden.planets.model.Planet
+import com.tryden.planets.model.PlanetLocal
 
 
 @Composable
 fun PlanetsDetail(
-    selectedPlanet: Planet,
+    selectedPlanetLocal: PlanetLocal,
     onBackPressed: () -> Unit,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier
@@ -59,7 +59,7 @@ fun PlanetsDetail(
                    Modifier.background(color = colorResource(id = R.color.black))
                 ){
                     Image(
-                        painter = painterResource(id = selectedPlanet.imageResourceId),
+                        painter = painterResource(id = selectedPlanetLocal.imageResourceId),
                         contentDescription = null,
                         alignment = Alignment.TopCenter,
                         contentScale = ContentScale.FillWidth
@@ -78,7 +78,7 @@ fun PlanetsDetail(
                         )
                 ) {
                     Text(
-                        text = stringResource(id = selectedPlanet.titleResourceId),
+                        text = stringResource(id = selectedPlanetLocal.titleResourceId),
                         style = MaterialTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         modifier = Modifier
@@ -87,7 +87,7 @@ fun PlanetsDetail(
                 }
             }
             Text(
-                text = stringResource(id = selectedPlanet.planetDetails),
+                text = stringResource(id = selectedPlanetLocal.planetDetails),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(
                     vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),

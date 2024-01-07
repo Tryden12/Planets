@@ -12,9 +12,9 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tryden.planets.R
 import com.tryden.planets.ui.appbar.PlanetsAppBar
-import com.tryden.planets.ui.screens.PlanetsDetail
-import com.tryden.planets.ui.screens.PlanetsList
-import com.tryden.planets.ui.screens.PlanetsListAndDetail
+import com.tryden.planets.ui.screens.detail.PlanetsDetail
+import com.tryden.planets.ui.screens.list.PlanetsList
+import com.tryden.planets.ui.screens.listAndDetail.PlanetsListAndDetail
 import com.tryden.planets.utils.PlanetsContentType
 
 /**
@@ -26,7 +26,8 @@ fun PlanetsApp(
     windowSize: WindowWidthSizeClass,
     onBackPressed: () -> Unit
 ) {
-    val viewModel: PlanetsViewModel = viewModel()
+    // We utilizing a ViewModel.Factory for manual DI
+    val viewModel: PlanetsViewModel = viewModel(factory = PlanetsViewModel.Factory)
     val uiState by viewModel.uiState.collectAsState()
     val contentType = when (windowSize) {
         WindowWidthSizeClass.Compact,
@@ -46,8 +47,8 @@ fun PlanetsApp(
     ) { innerPadding ->
         if (contentType == PlanetsContentType.ListAndDetail) {
              PlanetsListAndDetail(
-                 planets = uiState.planetsList,
-                 selectedPlanet = uiState.currentPlanet,
+                 planetLocals = uiState.planetsList,
+                 selectedPlanetLocal = uiState.currentPlanetLocal,
                  onClick = {
                      viewModel.updateCurrentPlanet(it)
                  },
@@ -58,7 +59,7 @@ fun PlanetsApp(
         } else {
             if (uiState.isShowingListPage) {
                 PlanetsList(
-                    planets = uiState.planetsList,
+                    planetLocals = uiState.planetsList,
                     onClick = {
                         viewModel.updateCurrentPlanet(it)
                         viewModel.navigateToDetailPage()
@@ -68,7 +69,7 @@ fun PlanetsApp(
                 )
             } else {
                  PlanetsDetail(
-                     selectedPlanet = uiState.currentPlanet,
+                     selectedPlanetLocal = uiState.currentPlanetLocal,
                      contentPadding = innerPadding,
                      onBackPressed = {
                          viewModel.navigateToListPage()

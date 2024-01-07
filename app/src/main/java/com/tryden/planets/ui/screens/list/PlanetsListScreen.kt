@@ -1,4 +1,4 @@
-package com.tryden.planets.ui.screens
+package com.tryden.planets.ui.screens.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -30,12 +30,12 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.PlanetsTheme
 import com.tryden.planets.R
 import com.tryden.planets.data.LocalPlanetsDataProvider
-import com.tryden.planets.model.Planet
+import com.tryden.planets.model.PlanetLocal
 
 @Composable
 fun PlanetsList(
-    planets: List<Planet>,
-    onClick: (Planet) -> Unit,
+    planetLocals: List<PlanetLocal>,
+    onClick: (PlanetLocal) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -47,9 +47,9 @@ fun PlanetsList(
             bottom = dimensionResource(R.dimen.padding_medium)
         ),
     ) {
-        items(planets, key = { planet -> planet.id}) { planet ->
+        items(planetLocals, key = { planet -> planet.id}) { planet ->
             PlanetsListItem(
-                planet = planet,
+                planetLocal = planet,
                 onItemClick = onClick
             )
         }
@@ -59,15 +59,15 @@ fun PlanetsList(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlanetsListItem(
-    planet: Planet,
-    onItemClick: (Planet) -> Unit,
+    planetLocal: PlanetLocal,
+    onItemClick: (PlanetLocal) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         elevation = CardDefaults.cardElevation(),
         modifier = modifier,
         shape = RoundedCornerShape(dimensionResource(R.dimen.card_corner_radius)),
-        onClick = { onItemClick(planet) }
+        onClick = { onItemClick(planetLocal) }
     ) {
         Row(
             modifier = Modifier
@@ -79,7 +79,7 @@ fun PlanetsListItem(
                     .weight(1f)
             ){
                 PlanetsListImageItem(
-                    planet = planet,
+                    planetLocal = planetLocal,
                     modifier = Modifier.size(dimensionResource(R.dimen.card_image_height))
                 )
             }
@@ -92,12 +92,12 @@ fun PlanetsListItem(
                     .weight(1f)
             ) {
                 Text(
-                    text = stringResource(planet.titleResourceId),
+                    text = stringResource(planetLocal.titleResourceId),
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(bottom = dimensionResource(R.dimen.card_text_vertical_space))
                 )
                 Text(
-                    text = stringResource(planet.subtitleResourceId),
+                    text = stringResource(planetLocal.subtitleResourceId),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.secondary,
                     overflow = TextOverflow.Ellipsis,
@@ -109,10 +109,10 @@ fun PlanetsListItem(
 }
 
 @Composable
-private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) {
+private fun PlanetsListImageItem(planetLocal: PlanetLocal, modifier: Modifier = Modifier) {
     Box(modifier = Modifier) {
         Image(
-            painter = painterResource(id = planet.imageResourceId),
+            painter = painterResource(id = planetLocal.imageResourceId),
             contentDescription = null,
             alignment = Alignment.Center,
             contentScale = ContentScale.FillWidth
@@ -126,7 +126,7 @@ private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) 
 fun PlanetsListItemPreview() {
     PlanetsTheme {
         PlanetsListItem(
-            planet = LocalPlanetsDataProvider.defaultPlanet,
+            planetLocal = LocalPlanetsDataProvider.defaultPlanet,
             onItemClick = {}
         )
     }

@@ -1,4 +1,4 @@
-package com.tryden.planets.ui.screens
+package com.tryden.planets.ui.screens.listAndDetail
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.PlanetsTheme
 import com.tryden.planets.R
 import com.tryden.planets.data.LocalPlanetsDataProvider
-import com.tryden.planets.model.Planet
+import com.tryden.planets.model.PlanetLocal
+import com.tryden.planets.ui.screens.detail.PlanetsDetail
+import com.tryden.planets.ui.screens.list.PlanetsList
 
 
 /**
@@ -23,9 +25,9 @@ import com.tryden.planets.model.Planet
  */
 @Composable
 fun PlanetsListAndDetail(
-    planets: List<Planet>,
-    selectedPlanet: Planet,
-    onClick: (Planet) -> Unit,
+    planetLocals: List<PlanetLocal>,
+    selectedPlanetLocal: PlanetLocal,
+    onClick: (PlanetLocal) -> Unit,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
@@ -34,7 +36,7 @@ fun PlanetsListAndDetail(
         modifier = modifier
     ) {
         PlanetsList(
-            planets = planets,
+            planetLocals = planetLocals,
             onClick = onClick,
             contentPadding = PaddingValues(
                 top = contentPadding.calculateTopPadding()
@@ -44,7 +46,7 @@ fun PlanetsListAndDetail(
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
         )
         PlanetsDetail(
-            selectedPlanet = selectedPlanet,
+            selectedPlanetLocal = selectedPlanetLocal,
             onBackPressed = onBackPressed,
             contentPadding = PaddingValues(
                 top = contentPadding.calculateTopPadding()
@@ -60,8 +62,8 @@ fun PlanetsListAndDetailsPreview() {
     PlanetsTheme {
         Surface {
             PlanetsListAndDetail(
-                planets = LocalPlanetsDataProvider.getPlanetsData(),
-                selectedPlanet = LocalPlanetsDataProvider.getPlanetsData().getOrElse(0){
+                planetLocals = LocalPlanetsDataProvider.getPlanetsData(),
+                selectedPlanetLocal = LocalPlanetsDataProvider.getPlanetsData().getOrElse(0){
                     LocalPlanetsDataProvider.defaultPlanet
                 },
                 onClick = {},
