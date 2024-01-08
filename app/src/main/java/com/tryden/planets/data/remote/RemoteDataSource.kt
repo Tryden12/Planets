@@ -19,12 +19,18 @@ constructor(private val api: PlanetsApiService): RemoteSource {
             when (res.isSuccessful) {
                 true -> {
                     res.body()?.let { planetsList ->
+                        Log.d("RemoteDataSource", "PlanetsList: ${planetsList.size}" )
+
                         return Resource.Success(data = planetsList)
                     } ?: return Resource.DataError(errorCode = res.code())
                 }
-                false -> return Resource.DataError(errorCode = res.code())
+                false -> {
+                    Log.d("RemoteDataSource", "PlanetsList: 0 -> NOT SUCCESSFUL, ${res.code()}" )
+                    return Resource.DataError(errorCode = res.code())
+                }
             }
         } catch (e: Exception) {
+            Log.d("RemoteDataSource", "PlanetsList: 0 -> EXCEPTION" )
             Log.e("NETWORK_API_ERROR", "List cannot load ${e.hashCode()}")
             return Resource.DataError(errorCode = e.hashCode())
         }
