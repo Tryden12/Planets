@@ -2,16 +2,18 @@ package com.tryden.planets.data.remote
 
 import android.util.Log
 import com.tryden.planets.data.Resource
-import com.tryden.planets.data.remote.dto.PlanetResponse
-import com.tryden.planets.domain.Planet
-import com.tryden.planets.network.PlanetsApiService
+import com.tryden.planets.data.remote.dto.PlanetDto
+import com.tryden.planets.data.remote.service.PlanetsApiService
 import javax.inject.Inject
 
+/**
+ * We fetch data from remote source: planets api.
+ * We utilize the Resource class for Success, Loading, and DataError cases.
+ */
 class RemoteDataSource @Inject
 constructor(private val api: PlanetsApiService): RemoteSource {
-    override suspend fun getAllPlanets(): Resource<List<PlanetResponse>> {
+    override suspend fun getAllPlanets(): Resource<List<PlanetDto>> {
         try {
-            val planetsList = mutableListOf<Planet>()
             val res = api.getAllPlanets()
 
             when (res.isSuccessful) {
@@ -28,7 +30,7 @@ constructor(private val api: PlanetsApiService): RemoteSource {
         }
     }
 
-    override suspend fun getPlanet(id: Int): Resource<PlanetResponse> {
+    override suspend fun getPlanet(id: Int): Resource<PlanetDto> {
         try {
             val res = api.getPlanet(id)
 

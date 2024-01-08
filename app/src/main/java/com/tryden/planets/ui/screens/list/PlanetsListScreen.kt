@@ -27,12 +27,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.tryden.planets.R
-import com.tryden.planets.data.remote.dto.PlanetResponse
+import com.tryden.planets.data.remote.dto.PlanetDto
 
 @Composable
 fun PlanetsList(
-    planets: List<PlanetResponse>,
-    onClick: (PlanetResponse) -> Unit,
+    planets: List<PlanetDto>,
+    onClick: (PlanetDto) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -56,8 +56,8 @@ fun PlanetsList(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlanetsListItem(
-    planet: PlanetResponse,
-    onItemClick: (PlanetResponse) -> Unit,
+    planet: PlanetDto,
+    onItemClick: (PlanetDto) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -106,7 +106,7 @@ fun PlanetsListItem(
 }
 
 @Composable
-private fun PlanetsListImageItem(planet: PlanetResponse, modifier: Modifier = Modifier) {
+private fun PlanetsListImageItem(planet: PlanetDto, modifier: Modifier = Modifier) {
     Box(modifier = Modifier) {
 //        Image(
 //            painter = painterResource(id = planetLocal.imageResourceId),

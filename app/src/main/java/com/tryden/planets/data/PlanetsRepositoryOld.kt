@@ -1,18 +1,17 @@
 package com.tryden.planets.data
 
-import com.tryden.planets.data.remote.dto.PlanetResponse
-import com.tryden.planets.network.PlanetsApiService
-import javax.inject.Inject
+import com.tryden.planets.data.remote.dto.PlanetDto
+import com.tryden.planets.data.remote.service.PlanetsApiService
 
 /**
  * Repository that fetch planet list from PlanetsApi.
  */
 interface PlanetsRepository {
     /** Fetches list of Planet from PlanetsApi */
-    suspend fun getAllPlanets(): List<PlanetResponse>
+    suspend fun getAllPlanets(): List<PlanetDto>
 
     /** Fetches a Planet from PlanetsApi */
-    suspend fun getPlanet(): PlanetResponse
+    suspend fun getPlanet(): PlanetDto
 
 }
 
@@ -23,9 +22,9 @@ class NetworkPlanetsRepository(
     private val planetsApiService: PlanetsApiService
 ): PlanetsRepository {
     /** Fetches list of Planet from PlanetsApi */
-    override suspend fun getAllPlanets(): List<PlanetResponse> = planetsApiService.getAllPlanets()
+    override suspend fun getAllPlanets(): List<PlanetDto> = planetsApiService.getAllPlanets()
 
     /** Fetches a Planet from PlanetsApi */
-    override suspend fun getPlanet(): PlanetResponse = planetsApiService.getPlanet()
+    override suspend fun getPlanet(): PlanetDto = planetsApiService.getPlanet()
 
 }

@@ -1,7 +1,7 @@
 package com.tryden.planets.ui
 
 import com.tryden.planets.data.local.LocalPlanetsDataProvider
-import com.tryden.planets.domain.PlanetLocal
+import com.tryden.planets.domain.model.PlanetLocal
 
 data class PlanetsUiStateOld(
     val planetsList: List<PlanetLocal> = emptyList(),

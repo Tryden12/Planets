@@ -11,7 +11,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.tryden.planets.PlanetsApplication
 import com.tryden.planets.data.local.LocalPlanetsDataProvider
 import com.tryden.planets.data.PlanetsRepository
-import com.tryden.planets.domain.PlanetLocal
+import com.tryden.planets.domain.model.PlanetLocal
 import com.tryden.planets.ui.screens.detail.PlanetDetailUiState
 import com.tryden.planets.ui.screens.list.PlanetsListUiState
 import com.tryden.planets.ui.screens.listAndDetail.PlanetListAndDetailUiState

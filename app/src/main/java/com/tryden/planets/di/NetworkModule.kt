@@ -2,7 +2,7 @@ package com.tryden.planets.di
 
 import com.tryden.planets.data.remote.RemoteDataSource
 import com.tryden.planets.data.remote.RemoteSource
-import com.tryden.planets.network.PlanetsApiService
+import com.tryden.planets.data.remote.service.PlanetsApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

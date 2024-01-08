@@ -1,7 +1,7 @@
 package com.tryden.planets.data.local
 
 import com.tryden.planets.R
-import com.tryden.planets.domain.PlanetLocal
+import com.tryden.planets.domain.model.PlanetLocal
 
 /**
  * Planets data

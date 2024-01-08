@@ -26,7 +26,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.tryden.planets.R
-import com.tryden.planets.domain.PlanetLocal
+import com.tryden.planets.domain.model.PlanetLocal
 
 
 @Composable

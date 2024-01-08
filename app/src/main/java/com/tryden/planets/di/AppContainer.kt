@@ -3,12 +3,11 @@ package com.tryden.planets.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.tryden.planets.data.NetworkPlanetsRepository
 import com.tryden.planets.data.PlanetsRepository
-import com.tryden.planets.network.PlanetsApiService
+import com.tryden.planets.data.remote.service.PlanetsApiService
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.Response
 import retrofit2.Retrofit
 

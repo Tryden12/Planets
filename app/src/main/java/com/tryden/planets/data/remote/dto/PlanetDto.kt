@@ -3,7 +3,7 @@ package com.tryden.planets.data.remote.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PlanetResponse(
+data class PlanetDto(
     val basicDetails: BasicDetails,
     val description: String,
     val id: Int,
