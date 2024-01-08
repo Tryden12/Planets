@@ -1,5 +1,6 @@
 package com.tryden.planets.ui.screens.list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,15 +28,16 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.tryden.planets.R
-import com.tryden.planets.data.remote.dto.PlanetDto
+import com.tryden.planets.domain.model.Planet
 
 @Composable
 fun PlanetsList(
-    planets: List<PlanetDto>,
-    onClick: (PlanetDto) -> Unit,
+    planets: List<Planet>,
+    onClick: (Planet) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
+    Log.d("PlanetList", "PlanetsList: ${planets.size}" )
     LazyColumn(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
@@ -56,8 +58,8 @@ fun PlanetsList(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlanetsListItem(
-    planet: PlanetDto,
-    onItemClick: (PlanetDto) -> Unit,
+    planet: Planet,
+    onItemClick: (Planet) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -106,7 +108,7 @@ fun PlanetsListItem(
 }
 
 @Composable
-private fun PlanetsListImageItem(planet: PlanetDto, modifier: Modifier = Modifier) {
+private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) {
     Box(modifier = Modifier) {
 //        Image(
 //            painter = painterResource(id = planetLocal.imageResourceId),
@@ -120,7 +122,7 @@ private fun PlanetsListImageItem(planet: PlanetDto, modifier: Modifier = Modifie
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(context = LocalContext.current)
-                    .data(planet.imgSrc)
+                    .data(planet.imgUrl)
                     .crossfade(true)
                     .build(),
                 contentScale = ContentScale.Crop,

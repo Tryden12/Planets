@@ -20,18 +20,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.tryden.planets.R
+import com.tryden.planets.domain.model.Planet
 import com.tryden.planets.domain.model.PlanetLocal
 
 
 @Composable
 fun PlanetsDetail(
-    selectedPlanetLocal: PlanetLocal,
+    planet: Planet,
     onBackPressed: () -> Unit,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier
@@ -58,12 +62,26 @@ fun PlanetsDetail(
                 Box(
                    Modifier.background(color = colorResource(id = R.color.black))
                 ){
-                    Image(
-                        painter = painterResource(id = selectedPlanetLocal.imageResourceId),
-                        contentDescription = null,
+//                    Image(
+//                        painter = painterResource(id = selectedPlanetLocal.imageResourceId),
+//                        contentDescription = null,
+//                        alignment = Alignment.TopCenter,
+//                        contentScale = ContentScale.FillWidth
+//                    )
+
+                    AsyncImage(
+                        model = ImageRequest.Builder(context = LocalContext.current)
+                            .data(planet.imgUrl)
+                            .crossfade(true)
+                            .build(),
+                        contentScale = ContentScale.FillWidth,
+                        contentDescription = planet.description,
                         alignment = Alignment.TopCenter,
-                        contentScale = ContentScale.FillWidth
+                        error = painterResource(id = R.drawable.ic_broken_image),
+                        placeholder = painterResource(id = R.drawable.loading_img),
+                        modifier = Modifier.fillMaxWidth()
                     )
+
                 }
                 Column(
                     Modifier
@@ -78,7 +96,7 @@ fun PlanetsDetail(
                         )
                 ) {
                     Text(
-                        text = stringResource(id = selectedPlanetLocal.titleResourceId),
+                        text = planet.name,
                         style = MaterialTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         modifier = Modifier
@@ -87,7 +105,7 @@ fun PlanetsDetail(
                 }
             }
             Text(
-                text = stringResource(id = selectedPlanetLocal.planetDetails),
+                text = planet.description,
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(
                     vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),

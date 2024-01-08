@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.PlanetsTheme
 import com.tryden.planets.R
 import com.tryden.planets.data.local.LocalPlanetsDataProvider
+import com.tryden.planets.domain.model.Planet
 import com.tryden.planets.domain.model.PlanetLocal
 import com.tryden.planets.ui.screens.detail.PlanetsDetail
 import com.tryden.planets.ui.screens.list.PlanetsList
@@ -25,9 +26,9 @@ import com.tryden.planets.ui.screens.list.PlanetsList
  */
 @Composable
 fun PlanetsListAndDetail(
-    planetLocals: List<PlanetLocal>,
-    selectedPlanetLocal: PlanetLocal,
-    onClick: (PlanetLocal) -> Unit,
+    planets: List<Planet>,
+    selectedPlanet: Planet,
+    onClick: (Planet) -> Unit,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
@@ -36,7 +37,7 @@ fun PlanetsListAndDetail(
         modifier = modifier
     ) {
         PlanetsList(
-            planetLocals = planetLocals,
+            planets = planets,
             onClick = onClick,
             contentPadding = PaddingValues(
                 top = contentPadding.calculateTopPadding()
@@ -46,7 +47,7 @@ fun PlanetsListAndDetail(
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
         )
         PlanetsDetail(
-            selectedPlanetLocal = selectedPlanetLocal,
+            planet = selectedPlanet,
             onBackPressed = onBackPressed,
             contentPadding = PaddingValues(
                 top = contentPadding.calculateTopPadding()
@@ -56,18 +57,18 @@ fun PlanetsListAndDetail(
     }
 }
 
-@Preview(device = Devices.TABLET)
-@Composable
-fun PlanetsListAndDetailsPreview() {
-    PlanetsTheme {
-        Surface {
-            PlanetsListAndDetail(
-                planetLocals = LocalPlanetsDataProvider.getPlanetsData(),
-                selectedPlanetLocal = LocalPlanetsDataProvider.getPlanetsData().getOrElse(0){
-                    LocalPlanetsDataProvider.defaultPlanet
-                },
-                onClick = {},
-                onBackPressed = {})
-        }
-    }
-}
+//@Preview(device = Devices.TABLET)
+//@Composable
+//fun PlanetsListAndDetailsPreview() {
+//    PlanetsTheme {
+//        Surface {
+//            PlanetsListAndDetail(
+//                planet = LocalPlanetsDataProvider.getPlanetsData(),
+//                selectedPlanet = LocalPlanetsDataProvider.getPlanetsData().getOrElse(0){
+//                    LocalPlanetsDataProvider.defaultPlanet
+//                },
+//                onClick = {},
+//                onBackPressed = {})
+//        }
+//    }
+//}
