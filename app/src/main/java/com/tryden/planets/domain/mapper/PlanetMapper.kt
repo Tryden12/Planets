@@ -2,9 +2,10 @@ package com.tryden.planets.domain.mapper
 
 import com.tryden.planets.data.remote.dto.PlanetDto
 import com.tryden.planets.domain.model.Planet
+import javax.inject.Inject
 
-object PlanetMapper {
-    fun buildFrom(planet: PlanetDto): Planet {
+class PlanetMapper @Inject constructor(): Mapper<Planet, PlanetDto> {
+    override fun buildFrom(planet: PlanetDto): Planet {
         return Planet(
             id = planet.id,
             name = planet.name,

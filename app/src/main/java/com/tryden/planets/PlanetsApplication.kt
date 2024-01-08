@@ -1,14 +1,10 @@
 package com.tryden.planets
 
 import android.app.Application
-import com.tryden.planets.di.AppContainer
-import com.tryden.planets.di.DefaultAppContainer
+import dagger.hilt.android.HiltAndroidApp
 
-class PlanetsApplication: Application() {
-    /** AppContainer instance used by the rest of classes to obtain dependencies */
-    lateinit var container: AppContainer
-    override fun onCreate() {
-        super.onCreate()
-        container = DefaultAppContainer()
-    }
-}
+/**
+ * This is the Application class which runs before any class.
+ */
+@HiltAndroidApp
+class PlanetsApplication: Application()
