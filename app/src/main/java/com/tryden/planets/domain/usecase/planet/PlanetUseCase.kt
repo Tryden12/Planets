@@ -1,6 +1,7 @@
 package com.tryden.planets.domain.usecase.planet
 
 import com.tryden.planets.data.repository.DataRepository
+import com.tryden.planets.domain.mapper.PlanetMapper
 import com.tryden.planets.domain.model.Planet
 import javax.inject.Inject
 
@@ -9,9 +10,12 @@ import javax.inject.Inject
  * This use case is later injected to the view model wherever it is required.
  */
 class PlanetUseCase @Inject constructor(
-    private val dataRepository: DataRepository
+    private val dataRepository: DataRepository,
+    private val planetMapper: PlanetMapper
 ): UseCase {
     override suspend fun getPlanet(id: Int): Planet? {
-        return dataRepository.getPlanet(id)
+        return dataRepository.getPlanet(id)?.let {planetDto ->
+            planetMapper.buildFrom(planetDto)
+        }
     }
 }

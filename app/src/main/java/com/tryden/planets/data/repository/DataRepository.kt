@@ -1,6 +1,6 @@
 package com.tryden.planets.data.repository
 
-import com.tryden.planets.domain.model.Planet
+import com.tryden.planets.data.remote.dto.PlanetDto
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface DataRepository {
 
-    fun getAllPlanets(): Flow<List<Planet>>
+    fun getAllPlanets(): Flow<List<PlanetDto>>
 
-    suspend fun getPlanet(id: Int): Planet?
+    suspend fun getPlanet(id: Int): PlanetDto?
 }

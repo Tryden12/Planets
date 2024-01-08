@@ -1,8 +1,8 @@
 package com.tryden.planets.data.repository
 
+import android.util.Log
 import com.tryden.planets.data.remote.RemoteSource
-import com.tryden.planets.domain.model.Planet
-import com.tryden.planets.domain.mapper.PlanetMapper
+import com.tryden.planets.data.remote.dto.PlanetDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,19 +16,22 @@ import javax.inject.Inject
 class DataRepositoryImpl @Inject
 constructor(
     private val remoteDataSource: RemoteSource,
-    private val planetMapper: PlanetMapper
+//    private val planetMapper: PlanetMapper
 ) : DataRepository {
 
     /**
      * We use flow on Dispatchers.IO thread to fetch the planets list data.
      * We then map from DTO model to a UI model using PlanetMapper object.
      */
-    override fun getAllPlanets(): Flow<List<Planet>> {
+    override fun getAllPlanets(): Flow<List<PlanetDto>> {
         return flow {
             remoteDataSource.getAllPlanets().data?.let { list ->
-                emit(list.map { planetDto ->
-                    planetMapper.buildFrom(planetDto)
-                })
+//                emit(list.map { planetDto ->
+//                    planetMapper.buildFrom(planetDto)
+//                })
+                Log.d("DataRepositoryImpl", "PlanetsList: ${list.size}" )
+
+                emit(list)
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -36,10 +39,11 @@ constructor(
     /**
      * We fetch the planet data. We then map from DTO model to a UI model using PlanetMapper object.
      */
-    override suspend fun getPlanet(id: Int): Planet? {
-        return remoteDataSource.getPlanet(id).data?.let { planetDto ->
-            planetMapper.buildFrom(planetDto)
-        }
+    override suspend fun getPlanet(id: Int): PlanetDto? {
+//        return remoteDataSource.getPlanet(id).data?.let { planetDto ->
+//            planetMapper.buildFrom(planetDto)
+//        }
+        return remoteDataSource.getPlanet(id).data
     }
 
 }
