@@ -23,21 +23,24 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.compose.PlanetsTheme
 import com.tryden.planets.R
 import com.tryden.planets.domain.model.Planet
 
 @Composable
-fun PlanetsList(
+fun PlanetsListScreen(
     planets: List<Planet>,
     onClick: (Planet) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
-    Log.d("PlanetList", "PlanetsList: ${planets.size}" )
+    Log.d("PlanetListScreen", "PlanetsList: ${planets.size}" )
     LazyColumn(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
@@ -75,7 +78,6 @@ fun PlanetsListItem(
         ) {
             Column(
                 modifier = Modifier
-                    .weight(1f)
             ){
                 PlanetsListImageItem(
                     planet = planet,
@@ -92,7 +94,8 @@ fun PlanetsListItem(
             ) {
                 Text(
                     text = planet.name,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = dimensionResource(R.dimen.card_text_vertical_space))
                 )
                 Text(
@@ -109,45 +112,34 @@ fun PlanetsListItem(
 
 @Composable
 private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) {
-    Box(modifier = Modifier) {
-//        Image(
-//            painter = painterResource(id = planetLocal.imageResourceId),
-//            contentDescription = null,
-//            alignment = Alignment.Center,
-//            contentScale = ContentScale.FillWidth
-//        )
-        Card(
-            modifier = modifier,
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-        ) {
-            AsyncImage(
-                model = ImageRequest.Builder(context = LocalContext.current)
-                    .data(planet.imgUrl)
-                    .crossfade(true)
-                    .build(),
-                contentScale = ContentScale.Crop,
-                contentDescription = planet.description,
-                error = painterResource(id = R.drawable.ic_broken_image),
-                placeholder = painterResource(id = R.drawable.loading_img),
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+    Box(modifier = Modifier.fillMaxWidth(.4f)) {
+        AsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(planet.imgUrl)
+                .crossfade(true)
+                .build(),
+            contentScale = ContentScale.Crop,
+            contentDescription = planet.description,
+            error = painterResource(id = R.drawable.ic_broken_image),
+            placeholder = painterResource(id = R.drawable.loading_img),
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
 
-//@Preview
-//@Composable
-//fun PlanetsListItemPreview() {
-//    PlanetsTheme {
-//        PlanetsListItem(
-//            planet = Planet (
-//                // todo
-//            ),
-//            onItemClick = {}
-//        )
-//    }
-//}
+@Preview
+@Composable
+fun PlanetsListItemPreview() {
+    PlanetsTheme {
+        PlanetsListItem(
+            planet = Planet (
+                // todo
+            ),
+            onItemClick = {}
+        )
+    }
+}
 
 //@Preview
 //@Composable
@@ -155,7 +147,7 @@ private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) 
 //    PlanetsTheme {
 //        Surface {
 //            PlanetsList(
-//                planets = LocalPlanetsDataProvider.getPlanetsData(),
+//                planets = ,
 //                onClick = {},
 //            )
 //        }

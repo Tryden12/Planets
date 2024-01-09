@@ -14,7 +14,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tryden.planets.R
 import com.tryden.planets.ui.appbar.PlanetsAppBar
 import com.tryden.planets.ui.screens.detail.PlanetsDetail
-import com.tryden.planets.ui.screens.list.PlanetsList
+import com.tryden.planets.ui.screens.list.PlanetsListScreen
 import com.tryden.planets.ui.screens.list.PlanetsListViewModel
 import com.tryden.planets.ui.screens.listAndDetail.PlanetsListAndDetail
 import com.tryden.planets.utils.PlanetsContentType
@@ -63,7 +63,7 @@ fun PlanetsApp(
              )
         } else {
             if (uiState.isShowingListPage) {
-                PlanetsList(
+                PlanetsListScreen(
                     planets = uiState.planets,
                     onClick = {
                         viewModel.updateCurrentPlanet(it)
