@@ -56,7 +56,6 @@ object NetworkModule {
     fun createClient(): OkHttpClient {
         val client = OkHttpClient.Builder().apply {
             addInterceptor(MyInterceptor())
-//            interceptors().add(MyInterceptor())
         }.build()
         return client
     }
