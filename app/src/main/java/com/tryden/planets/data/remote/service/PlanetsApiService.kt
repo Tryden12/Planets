@@ -12,7 +12,7 @@ interface PlanetsApiService {
     /**
      * Returns a [List] of [PlanetDto] and this method can be called from a Coroutine.
      */
-    @GET("planets")
+    @GET("planets/")
     suspend fun getAllPlanets(): Response<List<PlanetDto>>
 
     /**
