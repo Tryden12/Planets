@@ -25,13 +25,12 @@ constructor(private val api: PlanetsApiService): RemoteSource {
                     } ?: return Resource.DataError(errorCode = res.code())
                 }
                 false -> {
-                    Log.d("RemoteDataSource", "PlanetsList: 0 -> NOT SUCCESSFUL, ${res.code()}" )
+                    Log.d("RemoteDataSource", "PlanetsList: 0 -> NOT SUCCESSFUL, res code: ${res.code()}" )
                     return Resource.DataError(errorCode = res.code())
                 }
             }
         } catch (e: Exception) {
-            Log.d("RemoteDataSource", "PlanetsList: 0 -> EXCEPTION" )
-            Log.e("NETWORK_API_ERROR", "List cannot load ${e.hashCode()}")
+            Log.e("RemoteDataSource", "PlanetsList: Exception hash code: ${e.hashCode()}")
             return Resource.DataError(errorCode = e.hashCode())
         }
     }
@@ -42,14 +41,18 @@ constructor(private val api: PlanetsApiService): RemoteSource {
 
             when (res.isSuccessful) {
                 true -> {
-                    res.body()?.let { body ->
-                        return Resource.Success(data = body)
+                    res.body()?.let { planetDto ->
+                        Log.d("RemoteDataSource", "Planet: ${planetDto.name}, id: ${planetDto.id}" )
+                        return Resource.Success(data = planetDto)
                     } ?: return Resource.DataError(errorCode = res.code())
                 }
-                false -> return Resource.DataError(errorCode = res.code())
+                false -> {
+                    Log.d("RemoteDataSource", "PlanetsList: 0 -> NOT SUCCESSFUL, res code: ${res.code()}" )
+                    return Resource.DataError(errorCode = res.code())
+                }
             }
         } catch (e: Exception) {
-            Log.e("NETWORK_API_ERROR", "List cannot load ${e.hashCode()}")
+            Log.e("RemoteDataSource", "PlanetsList: Exception hash code: ${e.hashCode()}")
             return Resource.DataError(errorCode = e.hashCode())
         }
     }
