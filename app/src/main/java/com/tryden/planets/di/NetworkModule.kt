@@ -38,21 +38,7 @@ object NetworkModule {
             addInterceptor(MyInterceptor())
         }.build()
         return client
-
-//            .addInterceptor { chain -> return@addInterceptor addHeadersToRequests(chain) }
-//        return okHttpClientBuilder.build()
     }
-
-//    private fun addHeadersToRequests(chain: Interceptor.Chain): Response {
-//        val request = chain.request().newBuilder()
-//        val originalHttpUrl = chain.request().url
-//        val newUrl = originalHttpUrl.newBuilder()
-//            .addQueryParameter("X-RapidAPI-Key", "13a44ed739msh8578ea5034fbd7cp1e5572jsn3c5106c8b3a6")
-//            .addQueryParameter("X-RapidAPI-Host", "planets-info-by-newbapi.p.rapidapi.com")
-//            .build()
-//        request.url(newUrl)
-//        return chain.proceed(request.build())
-//    }
 
     @Provides
     @Singleton
