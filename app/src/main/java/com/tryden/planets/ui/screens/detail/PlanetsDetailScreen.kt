@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,12 +28,15 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.compose.PlanetsTheme
 import com.tryden.planets.R
 import com.tryden.planets.domain.model.Planet
-import com.tryden.planets.domain.model.PlanetLocal
+
 
 
 @Composable
@@ -60,8 +64,11 @@ fun PlanetsDetail(
                     end = contentPadding.calculateEndPadding(layoutDirection)
                 )
         ) {
-            PlanetDetailImageBox(planet, modifier)
-            PlanetDetailInfo(planet, modifier)
+            // Top Image
+            PlanetDetailImageBox(planet)
+
+            // Bottom planet info
+            PlanetDetailInfo(planet)
         }
     }
 }
@@ -69,7 +76,7 @@ fun PlanetsDetail(
 @Composable
 fun PlanetDetailImageBox(
     planet: Planet,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     Box {
         Box(
@@ -115,58 +122,59 @@ fun PlanetDetailImageBox(
 @Composable
 fun PlanetDetailInfo(
     planet: Planet,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.onSurfaceVariant, shape = RectangleShape),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Column(modifier = modifier){
-            Text(
-                text = "Mass:",
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.padding(
-                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
-                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
-                )
-            )
-            Text(
-                text = planet.mass,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.padding(
-                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
-                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
-                )
-            )
-        }
-        Column(
-            modifier = modifier
-        ){
-            Text(
-                text = "Volume:",
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.padding(
-                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
-                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
-                )
-            )
-            Text(
-                text = planet.volume,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.padding(
-                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
-                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
-                )
-            )
-        }
-    }
+//    Row(
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .height(50.dp)
+//            .background(MaterialTheme.colorScheme.onSurfaceVariant, shape = RectangleShape),
+//        horizontalArrangement = Arrangement.Start,
+//        verticalAlignment = Alignment.CenterVertically,
+//    ) {
+//        Column(modifier = modifier){
+//            Text(
+//                text = stringResource(id = R.string.mass),
+//                style = MaterialTheme.typography.bodyLarge,
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                modifier = Modifier.padding(
+//                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
+//                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
+//                )
+//            )
+//            Text(
+//                text = planet.mass,
+//                style = MaterialTheme.typography.bodyMedium,
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                modifier = Modifier.padding(
+//                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
+//                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
+//                )
+//            )
+//        }
+//        Column(
+//            modifier = modifier
+//        ){
+//            Text(
+//                text = stringResource(id = R.string.volume),
+//                style = MaterialTheme.typography.bodyLarge,
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                modifier = Modifier.padding(
+//                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
+//                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
+//                )
+//            )
+//            Text(
+//                text = planet.volume,
+//                style = MaterialTheme.typography.bodyMedium,
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                modifier = Modifier.padding(
+//                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
+//                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
+//                )
+//            )
+//        }
+//    }
     Text(
         text = planet.description,
         style = MaterialTheme.typography.bodyMedium,
@@ -175,4 +183,17 @@ fun PlanetDetailInfo(
             horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
         )
     )
+}
+
+@Preview
+@Composable
+fun PlanetsDetailPreview() {
+    PlanetsTheme {
+        PlanetsDetail(
+            planet = Planet(),
+            onBackPressed = { },
+            contentPadding = PaddingValues(),
+            modifier = Modifier
+        )
+    }
 }

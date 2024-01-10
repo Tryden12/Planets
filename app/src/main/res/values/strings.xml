@@ -23,6 +23,8 @@
     <string name="dwarf_planets">Dwarf Planets</string>
 
     <!-- planet content -->
+    <string name="mass">Mass:</string>
+    <string name="volume">Volume:</string>
     <string name="planets_list_subtitle">Lorem ipsum consectetur adipiscing elit. Ultrices dolor rutrum.</string>
     <string name="planets_detail_text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
