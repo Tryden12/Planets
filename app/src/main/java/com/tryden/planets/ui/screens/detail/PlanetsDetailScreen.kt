@@ -5,9 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -25,6 +28,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.compose.PlanetsTheme
@@ -45,24 +49,78 @@ fun PlanetsDetailScreen(
     }
     val scrollState = rememberScrollState()
     val layoutDirection = LocalLayoutDirection.current
+    // Entire screen box
     Box(
        modifier = modifier
+           .fillMaxWidth()
            .verticalScroll(state = scrollState)
            .padding(top = contentPadding.calculateTopPadding())
+           .height(400.dp) // TODO: Fix height issue for screen sizes
+
     ) {
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     bottom = contentPadding.calculateTopPadding(),
                     start = contentPadding.calculateStartPadding(layoutDirection),
                     end = contentPadding.calculateEndPadding(layoutDirection)
                 )
         ) {
-            // Top Image
-            PlanetDetailImageBox(planet)
+            // Top column for image and planet name
+            Column(
+                modifier = modifier
+                    .background(color = colorResource(id = R.color.black))
+                    .fillMaxWidth()
+            ) {
 
-            // Bottom planet info
-            PlanetDetailInfo(planet)
+                Box(
+                    modifier = Modifier.fillMaxWidth()
+//                    .height(400.dp)
+                ) {
+                    AsyncImage(
+                        model = ImageRequest.Builder(context = LocalContext.current)
+                            .data(planet.imgUrl)
+                            .crossfade(true)
+                            .build(),
+                        contentScale = ContentScale.Inside,
+                        contentDescription = planet.description,
+                        alignment = Alignment.TopCenter,
+                        error = painterResource(id = R.drawable.ic_broken_image),
+                        placeholder = painterResource(id = R.drawable.loading_img),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Column(
+                        Modifier
+                            .align(Alignment.BottomStart)
+                            .fillMaxWidth()
+                            .background(
+                                Brush.verticalGradient(
+                                    listOf(Color.Transparent, MaterialTheme.colorScheme.scrim),
+                                    0f,
+                                    400f
+                                )
+                            )
+                    ) {
+                        Text(
+                            text = planet.name,
+                            style = MaterialTheme.typography.headlineLarge,
+                            color = MaterialTheme.colorScheme.inverseOnSurface,
+                            modifier = Modifier
+                                .padding(horizontal = dimensionResource(id = R.dimen.padding_small))
+                        )
+                    }
+                }
+            }
+            // Planet info
+            Text(
+                text = planet.description,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(
+                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
+                    horizontal = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
+                )
+            )
         }
     }
 }
