@@ -2,15 +2,12 @@ package com.tryden.planets.ui.screens.detail
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,16 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.compose.PlanetsTheme
@@ -40,7 +34,7 @@ import com.tryden.planets.domain.model.Planet
 
 
 @Composable
-fun PlanetsDetail(
+fun PlanetsDetailScreen(
     planet: Planet,
     onBackPressed: () -> Unit,
     contentPadding: PaddingValues,
@@ -189,7 +183,7 @@ fun PlanetDetailInfo(
 @Composable
 fun PlanetsDetailPreview() {
     PlanetsTheme {
-        PlanetsDetail(
+        PlanetsDetailScreen(
             planet = Planet(),
             onBackPressed = { },
             contentPadding = PaddingValues(),

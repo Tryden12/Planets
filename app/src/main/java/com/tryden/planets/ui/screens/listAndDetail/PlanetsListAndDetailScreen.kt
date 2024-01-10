@@ -9,7 +9,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.tryden.planets.R
 import com.tryden.planets.domain.model.Planet
-import com.tryden.planets.ui.screens.detail.PlanetsDetail
+import com.tryden.planets.ui.screens.detail.PlanetsDetailScreen
 import com.tryden.planets.ui.screens.list.PlanetsListScreen
 
 
@@ -40,7 +40,7 @@ fun PlanetsListAndDetail(
                 .weight(2f)
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
         )
-        PlanetsDetail(
+        PlanetsDetailScreen(
             planet = selectedPlanet,
             onBackPressed = onBackPressed,
             contentPadding = PaddingValues(

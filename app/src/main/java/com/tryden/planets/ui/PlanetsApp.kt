@@ -13,7 +13,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tryden.planets.R
 import com.tryden.planets.ui.appbar.PlanetsAppBar
-import com.tryden.planets.ui.screens.detail.PlanetsDetail
+import com.tryden.planets.ui.screens.detail.PlanetsDetailScreen
 import com.tryden.planets.ui.screens.list.PlanetsListScreen
 import com.tryden.planets.ui.screens.list.PlanetsListViewModel
 import com.tryden.planets.ui.screens.listAndDetail.PlanetsListAndDetail
@@ -73,7 +73,7 @@ fun PlanetsApp(
                     contentPadding = innerPadding
                 )
             } else {
-                 PlanetsDetail(
+                 PlanetsDetailScreen(
                      planet = uiState.currentPlanet,
                      contentPadding = innerPadding,
                      onBackPressed = {
