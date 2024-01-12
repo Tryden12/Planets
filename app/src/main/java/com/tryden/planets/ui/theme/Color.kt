@@ -3,7 +3,7 @@ import androidx.compose.ui.graphics.Color
 
 val overlay = Color(0x94F000000)
 
-val md_theme_light_primary = Color(0xFF225FA6)
+val md_theme_light_primary = Color(0xFF2172ff)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFD5E3FF)
 val md_theme_light_onPrimaryContainer = Color(0xFF001C3B)
