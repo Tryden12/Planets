@@ -1,6 +1,8 @@
 package com.example.compose
 import androidx.compose.ui.graphics.Color
 
+val overlay = Color(0x94F000000)
+
 val md_theme_light_primary = Color(0xFF225FA6)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFD5E3FF)
@@ -24,7 +26,7 @@ val md_theme_light_onSurface = Color(0xFF001B3D)
 val md_theme_light_surfaceVariant = Color(0xFFE0E2EC)
 val md_theme_light_onSurfaceVariant = Color(0xFF43474E)
 val md_theme_light_outline = Color(0xFF74777F)
-val md_theme_light_inverseOnSurface = Color(0xFFECF0FF)
+val md_theme_light_inverseOnSurface = Color(0xFFFFFFFF)
 val md_theme_light_inverseSurface = Color(0xFF003062)
 val md_theme_light_inversePrimary = Color(0xFFA7C8FF)
 val md_theme_light_shadow = Color(0xFF000000)
@@ -55,7 +57,7 @@ val md_theme_dark_onSurface = Color(0xFFD6E3FF)
 val md_theme_dark_surfaceVariant = Color(0xFF43474E)
 val md_theme_dark_onSurfaceVariant = Color(0xFFC4C6CF)
 val md_theme_dark_outline = Color(0xFF8E9199)
-val md_theme_dark_inverseOnSurface = Color(0xFF001B3D)
+val md_theme_dark_inverseOnSurface = Color(0xFFFFFFFF)
 val md_theme_dark_inverseSurface = Color(0xFFD6E3FF)
 val md_theme_dark_inversePrimary = Color(0xFF225FA6)
 val md_theme_dark_shadow = Color(0xFF000000)
