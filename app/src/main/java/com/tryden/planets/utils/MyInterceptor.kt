@@ -9,6 +9,10 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 
+/**
+ * This custom interceptor class is used in the NetworkModule to add headers to the base url.
+ * Headers: API Key & Host Name
+ */
 class MyInterceptor: Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
