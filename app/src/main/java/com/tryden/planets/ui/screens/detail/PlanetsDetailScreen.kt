@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -53,14 +54,16 @@ fun PlanetsDetailScreen(
     // Parent column
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
 //            .verticalScroll(state = scrollState)
             .padding(
                 top = contentPadding.calculateTopPadding(),
-                bottom = contentPadding.calculateTopPadding(),
                 start = contentPadding.calculateStartPadding(layoutDirection),
-                end = contentPadding.calculateEndPadding(layoutDirection)
+                end = contentPadding.calculateEndPadding(layoutDirection),
+                bottom = contentPadding.calculateBottomPadding()
             )
+            .background(colorResource(id = R.color.black))
+
     ) {
         // Planet Image
         Column(
@@ -111,14 +114,15 @@ fun PlanetsDetailScreen(
             Column {
                 Row(
                     horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+//                    modifier = modifier.padding(top = verticalPadding)
                 ) {
                     // Planet mass
                     Text(
                         text = stringResource(id = R.string.mass),
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.inverseOnSurface,
-                        modifier = Modifier.weight(.2f)
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.weight(.4f)
 
                     )
                     Text(
@@ -126,7 +130,7 @@ fun PlanetsDetailScreen(
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         textAlign = TextAlign.Left,
-                        modifier = Modifier.weight(.8f).padding(horizontal = horizontalPadding)
+                        modifier = Modifier.weight(.6f).padding(horizontal = horizontalPadding)
                     )
                 }
             }
@@ -138,16 +142,16 @@ fun PlanetsDetailScreen(
                     // Planet volume
                     Text(
                         text = stringResource(id = R.string.volume),
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.inverseOnSurface,
-                        modifier = Modifier.weight(.2f)
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.weight(.4f)
 
                     )
                     Text(
                         text = planet.volume,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
-                        modifier = Modifier.weight(.8f).padding(horizontal = horizontalPadding)
+                        modifier = Modifier.weight(.6f).padding(horizontal = horizontalPadding)
                     )
                 }
             }
