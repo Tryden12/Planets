@@ -15,7 +15,7 @@ class PlanetMapper @Inject constructor(): Mapper<Planet, PlanetDto> {
             wikiLink = planet.wikiLink,
             planetOrder = planet.planetOrder,
             mass = planet.basicDetails.mass,
-            volume = planet.basicDetails.mass
+            volume = planet.basicDetails.volume
         )
     }
 }
