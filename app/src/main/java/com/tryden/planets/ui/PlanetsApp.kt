@@ -54,6 +54,7 @@ fun PlanetsApp(
              PlanetsListAndDetail(
                  planets = uiState.planets,
                  selectedPlanet = uiState.currentPlanet,
+                 contentType = contentType,
                  onClick = {
                      viewModel.updateCurrentPlanet(it)
                  },
@@ -76,6 +77,7 @@ fun PlanetsApp(
                  PlanetsDetailScreen(
                      planet = uiState.currentPlanet,
                      contentPadding = innerPadding,
+                     contentType = contentType,
                      onBackPressed = {
                          viewModel.navigateToListPage()
                      }

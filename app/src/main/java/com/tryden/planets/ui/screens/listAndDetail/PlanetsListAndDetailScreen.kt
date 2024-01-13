@@ -11,6 +11,7 @@ import com.tryden.planets.R
 import com.tryden.planets.domain.model.Planet
 import com.tryden.planets.ui.screens.detail.PlanetsDetailScreen
 import com.tryden.planets.ui.screens.list.PlanetsListScreen
+import com.tryden.planets.utils.PlanetsContentType
 
 
 /**
@@ -22,6 +23,7 @@ import com.tryden.planets.ui.screens.list.PlanetsListScreen
 fun PlanetsListAndDetail(
     planets: List<Planet>,
     selectedPlanet: Planet,
+    contentType: PlanetsContentType,
     onClick: (Planet) -> Unit,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
@@ -43,6 +45,7 @@ fun PlanetsListAndDetail(
         PlanetsDetailScreen(
             planet = selectedPlanet,
             onBackPressed = onBackPressed,
+            contentType = contentType,
             contentPadding = PaddingValues(
                 top = contentPadding.calculateTopPadding()
             ),
