@@ -13,10 +13,12 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
@@ -56,27 +59,31 @@ fun PlanetsDetailScreen(
     val layoutDirection = LocalLayoutDirection.current
     val horizontalPadding = dimensionResource(id = R.dimen.padding_detail_content_horizontal)
     val verticalPadding = dimensionResource(id = R.dimen.padding_detail_content_vertical)
+    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
 
 
     // Parent column
     Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .background(colorResource(id = R.color.black))
             .padding(
                 top = contentPadding.calculateTopPadding(),
                 start = contentPadding.calculateStartPadding(layoutDirection),
                 end = contentPadding.calculateEndPadding(layoutDirection),
-                bottom = contentPadding.calculateBottomPadding()
-            )
-            .background(colorResource(id = R.color.black))
-            .verticalScroll(rememberScrollState())
+                bottom = contentPadding.calculateBottomPadding(),
 
+                )
     ) {
         // Planet Image
         Column(
-            modifier = modifier
+            Modifier
                 .fillMaxWidth()
-                .background(colorResource(id = R.color.black))
+                .padding(
+                    horizontal = horizontalPadding,
+                    vertical = verticalPadding
+                )
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(context = LocalContext.current)
@@ -89,6 +96,7 @@ fun PlanetsDetailScreen(
                 error = painterResource(id = R.drawable.ic_broken_image),
                 placeholder = painterResource(id = R.drawable.loading_img),
                 modifier = Modifier
+                    .height(screenHeight / 2)
                     .fillMaxWidth()
             )
         }
@@ -96,7 +104,6 @@ fun PlanetsDetailScreen(
         Column(
             Modifier
                 .fillMaxWidth()
-                .background(colorResource(id = R.color.black))
                 .padding(
                     horizontal = horizontalPadding,
                     vertical = verticalPadding
@@ -118,15 +125,19 @@ fun PlanetsDetailScreen(
                 modifier = Modifier
 
             )
-
-            Log.d("PlanetsDetailScreen", "ContentType: ${contentType.name}")
-            if (contentType == PlanetsContentType.ListAndDetail) {
+        }
+        Log.d("PlanetsDetailScreen", "ContentType: ${contentType.name}")
+        if (contentType == PlanetsContentType.ListAndDetail) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .height(25.dp)
+                    .padding(horizontal = horizontalPadding,)
+            ) {
                 Row(
-                    horizontalArrangement = Arrangement.Start,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = modifier
-                        .fillMaxWidth()
-                        .padding(top = verticalPadding)
                 ) {
                     // Planet mass
                     Text(
@@ -141,7 +152,7 @@ fun PlanetsDetailScreen(
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         textAlign = TextAlign.Left,
-                        modifier = Modifier
+                        modifier = Modifier.padding(top = 5.dp, end = 24.dp)
                     )
                     // Planet volume
                     Text(
@@ -155,12 +166,16 @@ fun PlanetsDetailScreen(
                         text = planet.volume,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
-                        modifier = Modifier
+                        modifier = Modifier.padding(top = 5.dp)
                     )
                 }
-
-
-            } else {
+            }
+        } else {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = horizontalPadding,)
+            ) {
                 Row(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically,
@@ -187,7 +202,7 @@ fun PlanetsDetailScreen(
                 Row(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     // Planet volume
                     Text(
                         text = stringResource(id = R.string.volume),
@@ -201,10 +216,14 @@ fun PlanetsDetailScreen(
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         modifier = Modifier.weight(.72f)
+
                     )
                 }
+
             }
         }
+
+        Spacer(modifier = Modifier.height(75.dp).fillMaxSize())
     }
 }
 
