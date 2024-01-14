@@ -112,14 +112,14 @@ fun PlanetsDetailScreen(
             Text(
                 text = planet.name,
                 style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
             )
             // Planet description
             Text(
                 text = planet.description,
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Left,
                 modifier = Modifier
 
@@ -149,7 +149,7 @@ fun PlanetsDetailScreen(
                     Text(
                         text = planet.mass,
                         style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Left,
                         modifier = Modifier.padding(top = 5.dp, end = 24.dp)
                     )
@@ -164,7 +164,7 @@ fun PlanetsDetailScreen(
                     Text(
                         text = planet.volume,
                         style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 5.dp)
                     )
                 }

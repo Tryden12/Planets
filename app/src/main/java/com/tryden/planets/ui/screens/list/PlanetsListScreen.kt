@@ -81,7 +81,7 @@ fun PlanetsListItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .size(dimensionResource(R.dimen.card_image_height))
-                .background(MaterialTheme.colorScheme.onPrimaryContainer)
+                .background(MaterialTheme.colorScheme.primaryContainer)
         ) {
             Column(
                 modifier = Modifier
@@ -103,13 +103,13 @@ fun PlanetsListItem(
                     text = planet.name,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     modifier = Modifier.padding(bottom = dimensionResource(R.dimen.card_text_vertical_space))
                 )
                 Text(
                     text = planet.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSecondary,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 3
                 )

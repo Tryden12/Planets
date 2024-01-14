@@ -38,7 +38,8 @@ fun PlanetsAppBar(
                     } else {
                         stringResource(id = R.string.list_fragment_label)
                     },
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimary
             )
         },
         navigationIcon = if (isShowingDetailPage) {
