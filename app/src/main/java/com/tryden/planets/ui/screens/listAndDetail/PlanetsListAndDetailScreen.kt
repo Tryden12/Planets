@@ -1,8 +1,13 @@
 package com.tryden.planets.ui.screens.listAndDetail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -41,6 +46,12 @@ fun PlanetsListAndDetail(
             modifier = Modifier
                 .weight(2f)
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
+        )
+        Spacer(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(.5.dp)
+                .background(MaterialTheme.colorScheme.onBackground)
         )
         PlanetsDetailScreen(
             planet = selectedPlanet,

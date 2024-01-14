@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -47,10 +48,11 @@ fun PlanetsListScreen(
     LazyColumn(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
-        modifier = modifier.padding(
-            top = dimensionResource(R.dimen.padding_medium),
-            bottom = dimensionResource(R.dimen.padding_medium)
-        ),
+        modifier = modifier
+            .padding(
+                top = dimensionResource(R.dimen.padding_medium),
+            )
+            .background(MaterialTheme.colorScheme.background)
     ) {
         items(planets, key = { planet -> planet.id}) { planet ->
             PlanetsListItem(
@@ -58,6 +60,7 @@ fun PlanetsListScreen(
                 onItemClick = onClick
             )
         }
+        item { Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))) }
     }
 }
 
@@ -78,6 +81,7 @@ fun PlanetsListItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .size(dimensionResource(R.dimen.card_image_height))
+                .background(MaterialTheme.colorScheme.onPrimaryContainer)
         ) {
             Column(
                 modifier = Modifier
@@ -99,12 +103,13 @@ fun PlanetsListItem(
                     text = planet.name,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier.padding(bottom = dimensionResource(R.dimen.card_text_vertical_space))
                 )
                 Text(
                     text = planet.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.secondary,
+                    color = MaterialTheme.colorScheme.onSecondary,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 3
                 )
@@ -128,7 +133,9 @@ private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) 
             contentDescription = planet.description,
             error = painterResource(id = R.drawable.ic_broken_image),
             placeholder = painterResource(id = R.drawable.loading_img),
-            modifier = Modifier.fillMaxWidth().fillMaxHeight()
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
         )
     }
 }
