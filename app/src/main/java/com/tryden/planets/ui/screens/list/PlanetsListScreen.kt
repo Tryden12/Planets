@@ -1,11 +1,13 @@
 package com.tryden.planets.ui.screens.list
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -112,17 +115,20 @@ fun PlanetsListItem(
 
 @Composable
 private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) {
-    Box(modifier = Modifier.fillMaxWidth(.4f)) {
+    Box(modifier = Modifier
+        .fillMaxWidth(.4f)
+        .background(colorResource(id = R.color.black))
+    ) {
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)
                 .data(planet.imgUrl)
                 .crossfade(true)
                 .build(),
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Inside,
             contentDescription = planet.description,
             error = painterResource(id = R.drawable.ic_broken_image),
             placeholder = painterResource(id = R.drawable.loading_img),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().fillMaxHeight()
         )
     }
 }

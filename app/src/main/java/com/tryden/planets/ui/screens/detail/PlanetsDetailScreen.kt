@@ -73,8 +73,7 @@ fun PlanetsDetailScreen(
                 start = contentPadding.calculateStartPadding(layoutDirection),
                 end = contentPadding.calculateEndPadding(layoutDirection),
                 bottom = contentPadding.calculateBottomPadding(),
-
-                )
+            )
     ) {
         // Planet Image
         Column(
