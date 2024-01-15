@@ -1,11 +1,14 @@
-package com.tryden.planets.ui.screens
+package com.tryden.planets.ui.screens.list
 
-import androidx.compose.foundation.Image
+import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,34 +21,38 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.compose.PlanetsTheme
 import com.tryden.planets.R
-import com.tryden.planets.data.LocalPlanetsDataProvider
-import com.tryden.planets.model.Planet
+import com.tryden.planets.domain.model.Planet
 
 @Composable
-fun PlanetsList(
+fun PlanetsListScreen(
     planets: List<Planet>,
     onClick: (Planet) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
+    Log.d("PlanetListScreen", "PlanetsList: ${planets.size}" )
     LazyColumn(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
-        modifier = modifier.padding(
-            top = dimensionResource(R.dimen.padding_medium),
-            bottom = dimensionResource(R.dimen.padding_medium)
-        ),
+        modifier = modifier
+            .padding(
+                top = dimensionResource(R.dimen.padding_medium),
+            )
+            .background(MaterialTheme.colorScheme.background)
     ) {
         items(planets, key = { planet -> planet.id}) { planet ->
             PlanetsListItem(
@@ -53,6 +60,7 @@ fun PlanetsList(
                 onItemClick = onClick
             )
         }
+        item { Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))) }
     }
 }
 
@@ -73,10 +81,10 @@ fun PlanetsListItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .size(dimensionResource(R.dimen.card_image_height))
+                .background(MaterialTheme.colorScheme.primaryContainer)
         ) {
             Column(
                 modifier = Modifier
-                    .weight(1f)
             ){
                 PlanetsListImageItem(
                     planet = planet,
@@ -92,14 +100,16 @@ fun PlanetsListItem(
                     .weight(1f)
             ) {
                 Text(
-                    text = stringResource(planet.titleResourceId),
-                    style = MaterialTheme.typography.titleMedium,
+                    text = planet.name,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     modifier = Modifier.padding(bottom = dimensionResource(R.dimen.card_text_vertical_space))
                 )
                 Text(
-                    text = stringResource(planet.subtitleResourceId),
+                    text = planet.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.secondary,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 3
                 )
@@ -110,12 +120,22 @@ fun PlanetsListItem(
 
 @Composable
 private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) {
-    Box(modifier = Modifier) {
-        Image(
-            painter = painterResource(id = planet.imageResourceId),
-            contentDescription = null,
-            alignment = Alignment.Center,
-            contentScale = ContentScale.FillWidth
+    Box(modifier = Modifier
+        .fillMaxWidth(.4f)
+        .background(colorResource(id = R.color.black))
+    ) {
+        AsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(planet.imgUrl)
+                .crossfade(true)
+                .build(),
+            contentScale = ContentScale.Inside,
+            contentDescription = planet.description,
+            error = painterResource(id = R.drawable.ic_broken_image),
+            placeholder = painterResource(id = R.drawable.loading_img),
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
         )
     }
 }
@@ -126,7 +146,9 @@ private fun PlanetsListImageItem(planet: Planet, modifier: Modifier = Modifier) 
 fun PlanetsListItemPreview() {
     PlanetsTheme {
         PlanetsListItem(
-            planet = LocalPlanetsDataProvider.defaultPlanet,
+            planet = Planet (
+                // todo
+            ),
             onItemClick = {}
         )
     }
@@ -138,7 +160,7 @@ fun PlanetsListItemPreview() {
 //    PlanetsTheme {
 //        Surface {
 //            PlanetsList(
-//                planets = LocalPlanetsDataProvider.getPlanetsData(),
+//                planets = ,
 //                onClick = {},
 //            )
 //        }

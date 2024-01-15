@@ -1,5 +1,6 @@
 package com.tryden.planets.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -12,9 +13,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tryden.planets.R
 import com.tryden.planets.ui.appbar.PlanetsAppBar
-import com.tryden.planets.ui.screens.PlanetsDetail
-import com.tryden.planets.ui.screens.PlanetsList
-import com.tryden.planets.ui.screens.PlanetsListAndDetail
+import com.tryden.planets.ui.screens.detail.PlanetsDetailScreen
+import com.tryden.planets.ui.screens.list.PlanetsListScreen
+import com.tryden.planets.ui.screens.list.PlanetsListViewModel
+import com.tryden.planets.ui.screens.listAndDetail.PlanetsListAndDetail
 import com.tryden.planets.utils.PlanetsContentType
 
 /**
@@ -26,7 +28,8 @@ fun PlanetsApp(
     windowSize: WindowWidthSizeClass,
     onBackPressed: () -> Unit
 ) {
-    val viewModel: PlanetsViewModel = viewModel()
+    // We utilizing a ViewModel.Factory for manual DI
+    val viewModel: PlanetsListViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
     val contentType = when (windowSize) {
         WindowWidthSizeClass.Compact,
@@ -34,6 +37,9 @@ fun PlanetsApp(
         WindowWidthSizeClass.Expanded -> PlanetsContentType.ListAndDetail
         else -> PlanetsContentType.ListOnly
     }
+
+    Log.d("PlanetsApp", "PlanetsList: ${uiState.planets.size}" )
+
 
     Scaffold(
         topBar = {
@@ -46,8 +52,9 @@ fun PlanetsApp(
     ) { innerPadding ->
         if (contentType == PlanetsContentType.ListAndDetail) {
              PlanetsListAndDetail(
-                 planets = uiState.planetsList,
+                 planets = uiState.planets,
                  selectedPlanet = uiState.currentPlanet,
+                 contentType = contentType,
                  onClick = {
                      viewModel.updateCurrentPlanet(it)
                  },
@@ -57,8 +64,8 @@ fun PlanetsApp(
              )
         } else {
             if (uiState.isShowingListPage) {
-                PlanetsList(
-                    planets = uiState.planetsList,
+                PlanetsListScreen(
+                    planets = uiState.planets,
                     onClick = {
                         viewModel.updateCurrentPlanet(it)
                         viewModel.navigateToDetailPage()
@@ -67,9 +74,10 @@ fun PlanetsApp(
                     contentPadding = innerPadding
                 )
             } else {
-                 PlanetsDetail(
-                     selectedPlanet = uiState.currentPlanet,
+                 PlanetsDetailScreen(
+                     planet = uiState.currentPlanet,
                      contentPadding = innerPadding,
+                     contentType = contentType,
                      onBackPressed = {
                          viewModel.navigateToListPage()
                      }

@@ -1,9 +1,9 @@
-package com.tryden.planets.model
+package com.tryden.planets.domain.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
-data class Planet(
+data class PlanetLocal(
     val id: Int,
     @StringRes val titleResourceId: Int,
     @StringRes val subtitleResourceId: Int,
