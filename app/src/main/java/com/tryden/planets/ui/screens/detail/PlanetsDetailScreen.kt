@@ -66,6 +66,7 @@ fun PlanetsDetailScreen(
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .fillMaxHeight()
             .verticalScroll(rememberScrollState())
             .background(colorResource(id = R.color.black))
             .padding(
