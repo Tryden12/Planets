@@ -38,7 +38,7 @@ fun PlanetsAppBar(
                     } else {
                         stringResource(id = R.string.list_fragment_label)
                     },
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },

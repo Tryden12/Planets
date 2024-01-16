@@ -53,14 +53,14 @@ val typography = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 22.sp,
         lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 1.sp
     ),
     titleSmall = TextStyle(
         fontFamily = primaryFontFamily,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
         lineHeight = 26.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 1.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = primaryFontFamily,
