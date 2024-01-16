@@ -33,7 +33,6 @@ fun PlanetsApp(
     onBackPressed: () -> Unit
 ) {
     // Instantiate ViewModel and set key variables
-    val viewModel: PlanetsListViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
     val contentType = when (windowSize) {
         WindowWidthSizeClass.Compact,
