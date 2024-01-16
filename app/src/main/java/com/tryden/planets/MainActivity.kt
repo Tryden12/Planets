@@ -10,7 +10,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.compose.PlanetsTheme
 import com.tryden.planets.ui.PlanetsApp
-import com.tryden.planets.ui.screens.list.PlanetsListViewModel
+import com.tryden.planets.ui.PlanetsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // Create ViewModel instance to run init block during splash screen
-        val viewModel: PlanetsListViewModel by viewModels()
+        val viewModel: PlanetsViewModel by viewModels()
 
         // Handle the splash screen transition
         // Only load the app once planets list is not empty

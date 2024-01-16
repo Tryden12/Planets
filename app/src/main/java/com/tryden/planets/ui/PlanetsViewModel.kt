@@ -1,21 +1,15 @@
-package com.tryden.planets.ui.screens.list
+package com.tryden.planets.ui
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.planets.domain.model.Planet
-import com.tryden.planets.domain.model.PlanetLocal
 import com.tryden.planets.domain.usecase.planetsList.PlanetsListUseCase
 import com.tryden.planets.ui.base.BaseViewModel
+import com.tryden.planets.ui.screens.list.PlanetsListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 
@@ -26,18 +20,12 @@ import javax.inject.Inject
  * We are using Flow to keep the data stream unidirectional.
  */
 @HiltViewModel
-class PlanetsListViewModel @Inject constructor(
+class PlanetsViewModel @Inject constructor(
     private val planetsListUseCase: PlanetsListUseCase
 ): BaseViewModel() {
 
-
-
     private val _uiState = MutableStateFlow(PlanetsListUiState())
     val uiState: StateFlow<PlanetsListUiState> = _uiState
-
-
-//    var uiState by mutableStateOf(PlanetsListUiState())
-//        private set
 
     init {
         getPlanetsList()
@@ -88,7 +76,5 @@ class PlanetsListViewModel @Inject constructor(
             it.copy(isShowingListPage = false)
         }
     }
-
-
 
 }

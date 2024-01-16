@@ -1,6 +1,5 @@
 package com.tryden.planets.ui
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,14 +10,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tryden.planets.R
 import com.tryden.planets.ui.appbar.PlanetsAppBar
 import com.tryden.planets.ui.screens.ErrorScreen
 import com.tryden.planets.ui.screens.LoadingScreen
 import com.tryden.planets.ui.screens.detail.PlanetsDetailScreen
 import com.tryden.planets.ui.screens.list.PlanetsListScreen
-import com.tryden.planets.ui.screens.list.PlanetsListViewModel
 import com.tryden.planets.ui.screens.listAndDetail.PlanetsListAndDetail
 import com.tryden.planets.utils.PlanetsContentType
 
@@ -28,7 +25,7 @@ import com.tryden.planets.utils.PlanetsContentType
  */
 @Composable
 fun PlanetsApp(
-    viewModel: PlanetsListViewModel,
+    viewModel: PlanetsViewModel,
     windowSize: WindowWidthSizeClass,
     onBackPressed: () -> Unit
 ) {
