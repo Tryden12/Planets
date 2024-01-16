@@ -131,7 +131,7 @@ fun PlanetsDetailScreen(
             Column(
                 Modifier
                     .fillMaxWidth()
-                    .height(25.dp)
+                    .height(40.dp)
                     .padding(horizontal = horizontalPadding,)
             ) {
                 Row(
@@ -186,7 +186,7 @@ fun PlanetsDetailScreen(
                     // Planet mass
                     Text(
                         text = stringResource(id = R.string.mass),
-                        style = MaterialTheme.typography.headlineSmall,
+                        style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.weight(.28f)
 
@@ -206,7 +206,7 @@ fun PlanetsDetailScreen(
                     // Planet volume
                     Text(
                         text = stringResource(id = R.string.volume),
-                        style = MaterialTheme.typography.headlineSmall,
+                        style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.weight(.28f)
 
