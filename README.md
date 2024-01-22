@@ -26,9 +26,8 @@ All the UI element designing is done using declarative UI (Jetpack Compose) inst
 
 I've created UI states to ensure [Unidirectional Data Flow](https://developer.android.com/topic/architecture/ui-layer#udf)
 
-![Unidirectional Data Flow](/screenshots/udf.png)
 <p align="center" width="100%">
-    <img width="50%" src="https://user-images.githubusercontent.com/9715067/197088633-488dbb42-a099-42e9-a788-bcfe5ba64eef.png" alt="Unidirectional Data Flow"/>
+    <img width="75%" src="https://user-images.githubusercontent.com/9715067/197088633-488dbb42-a099-42e9-a788-bcfe5ba64eef.png" alt="Unidirectional Data Flow"/>
 </p>
 
 ### Domain Layer
@@ -46,7 +45,7 @@ I am using [Hilt](https://developer.android.com/training/dependency-injection/hi
 
 The image below provides context to the architecture pattern used in this app:
 <p align="center" width="100%">
-    <img width="50%" src="https://user-images.githubusercontent.com/9715067/197084654-a826b6b7-5069-4ba7-98cb-fed1d67b2c27.png" alt="Pattern"/>
+    <img width="75%" src="https://user-images.githubusercontent.com/9715067/197084654-a826b6b7-5069-4ba7-98cb-fed1d67b2c27.png" alt="Pattern"/>
 </p>
 
 ## Libraries & Dependencies
@@ -69,7 +68,7 @@ Kotlin Flows
   * [Flows](https://developer.android.com/kotlin/flow) - A flow is conceptually a stream of data that can be computed asynchronously. The emitted values must be of the same type.
 
 ## Screenshots:
-![home - phone](/screenshots/planes_home_phone.png)
+![home - phone](/screenshots/planes_home_phone.png =100x100)
 ![detail- phone](/screenshots/planets_detail_phone.png)
 ![Scores](/screenshots/planets_home_tablet.png)
 
