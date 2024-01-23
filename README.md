@@ -12,7 +12,7 @@ pattern of building an app.
 
 Minimum SDK Version: 24
 
-compile SDK Version: 34
+Compile SDK Version: 34
 
 ## Architecture
 The architecture of this project is MVVM (Model View ViewModel) Clean Architecture. The app is built 
@@ -29,7 +29,7 @@ The responsibility of the UI layer (or presentation layer) is to display the app
 In this project, the UI layer includes UI elements such as Jetpack Compose functions, State Holders, and the UI States. 
 All the UI element designing is done using declarative UI (Jetpack Compose) instead of XML.
 
-I've created UI states to ensure [Unidirectional Data Flow](https://developer.android.com/topic/architecture/ui-layer#udf)
+I've created UI states to ensure [Unidirectional Data Flow](https://developer.android.com/topic/architecture/ui-layer#udf).
 
 <p align="center" width="100%">
     <img width="75%" src="https://user-images.githubusercontent.com/9715067/197088633-488dbb42-a099-42e9-a788-bcfe5ba64eef.png" alt="Unidirectional Data Flow"/>
@@ -40,6 +40,10 @@ The [domain layer](https://developer.android.com/topic/architecture/domain-layer
 The domain layer is responsible for encapsulating complex business logic, or simple business logic that is reused by multiple ViewModels. It includes all the Use Cases of the app, for example, PlanetsListUseCase.
 This is also the layer where we map response, Dto models to domain, UI models. This helps fitler out what we do not
 need in the UI layer from the response. 
+
+<p align="center" width="100%">
+    <img width="75%" src="https://developer.android.com/static/topic/libraries/architecture/images/mad-arch-domain-overview.png" alt="Domain Layer"/>
+</p>
 
 ### Data Layer
 The [data layer](https://developer.android.com/topic/architecture/data-layer) contains business logic and repositories containing 
