@@ -1,4 +1,10 @@
 # Planets
+![Scores](/screenshots/planets_home_tablet.png)
+
+<p align="center" width="100%">
+    <img width="70%" src="https://tylerryden.com/images/planets_home_tablet.png" alt="Planets - Tablet View"/>
+</p>
+
 Planets is a Kotlin app utilizing the 
 [Planets Info by NewbAPI](https://rapidapi.com/newbAPIOfficial/api/planets-info-by-newbapi/) to load data
 into the app. The user can select any planet for more information on the planet. 
@@ -6,8 +12,8 @@ into the app. The user can select any planet for more information on the planet.
 The purpose of this app is to showcase my understanding of properly utilizing a reliable, scalable 
 pattern of building an app.
 
-Minimum SDK Version: 21
-compile SDK Version: 33
+Minimum SDK Version: 24
+compile SDK Version: 34
 
 ## Architecture
 The architecture of this project is MVVM (Model View ViewModel) Clean Architecture. The app is built 
