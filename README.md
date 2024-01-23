@@ -61,7 +61,7 @@ The image below provides context to the architecture pattern used in this app:
 
   * [Jetpack Compose](https://developer.android.com/jetpack/compose) - Defines UI programmatically with composable functions that describe its shape and data dependencies.
   * [Modern App Architecture](https://developer.android.com/topic/architecture)
-  * [Retrofit](https://square.github.io/retrofit/)
+  * [Retrofit](https://square.github.io/retrofit/) - Interacts with the API and send network requests with OkHttp.
   * [Room](https://developer.android.com/training/data-storage/room) - Create, store, and manage persistent data backed by an SQLite database.
   * [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency injection plays a central role in the architectural pattern used.
   * [Kotlinx Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines. I used this for asynchronous programming to obtain data from the network.
