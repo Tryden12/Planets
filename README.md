@@ -11,6 +11,7 @@ The purpose of this app is to showcase my understanding of properly utilizing a 
 pattern of building an app.
 
 Minimum SDK Version: 24
+
 compile SDK Version: 34
 
 ## Architecture
