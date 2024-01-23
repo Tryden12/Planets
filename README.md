@@ -1,6 +1,4 @@
 # Planets
-![Scores](/screenshots/planets_home_tablet.png)
-
 <p align="center" width="100%">
     <img width="70%" src="https://tylerryden.com/images/planets_home_tablet.png" alt="Planets - Tablet View"/>
 </p>
