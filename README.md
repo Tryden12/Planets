@@ -58,14 +58,7 @@ The image below provides context to the architecture pattern used in this app:
 </p>
 
 ## Libraries & Dependencies
-Jetpack Compose
-Modern App Architecture
-MVVM
-Hilt Dependency Injection
-Use Case in Domain Layer
-Mapping Data Between Layers
-UiState
-Kotlin Flows
+
   * [Jetpack Compose](https://developer.android.com/jetpack/compose) - Defines UI programmatically with composable functions that describe its shape and data dependencies.
   * [Modern App Architecture](https://developer.android.com/topic/architecture)
   * [Retrofit](https://square.github.io/retrofit/)
@@ -78,14 +71,12 @@ Kotlin Flows
 
 ## Screenshots:
 <p align="center" width="100%">
-    <img width="32%" src="https://tylerryden.com/images/planets_UX.gif" alt="Planets demo"/>
     <img width="32%" src="https://tylerryden.com/images/planets_home_phone.png" alt="Planets home screen"/>
     <img width="32%" src="https://tylerryden.com/images/planets_detail_phone.png" alt="Planets detail screen"/>
 </p>
-
-![home phone](/screenshots/planes_home_phone.png) 
-![detail- phone](/screenshots/planets_detail_phone.png)
-![Scores](/screenshots/planets_home_tablet.png)
+<p align="center" width="100%">
+    <img width="65%" src="https://tylerryden.com/images/planets_home_tablet.png" alt="Planets - Tablet View"/>
+</p>
 
 
 
