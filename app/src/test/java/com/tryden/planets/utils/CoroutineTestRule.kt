@@ -9,6 +9,10 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
+
+/**
+ * This is the util class to provide Coroutine Test Rules for our unit tests.
+ */
 @ExperimentalCoroutinesApi
 class CoroutineTestRule(
     val dispatcher: TestDispatcher = UnconfinedTestDispatcher()
