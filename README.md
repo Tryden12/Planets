@@ -77,6 +77,12 @@ Kotlin Flows
   * [Flows](https://developer.android.com/kotlin/flow) - A flow is conceptually a stream of data that can be computed asynchronously. The emitted values must be of the same type.
 
 ## Screenshots:
+<p align="center" width="100%">
+    <img width="32%" src="https://tylerryden.com/images/planets_UX.gif" alt="Planets demo"/>
+    <img width="32%" src="https://tylerryden.com/images/planets_home_phone.png" alt="Planets home screen"/>
+    <img width="32%" src="https://tylerryden.com/images/planets_detail_phone.png" alt="Planets detail screen"/>
+</p>
+
 ![home phone](/screenshots/planes_home_phone.png) 
 ![detail- phone](/screenshots/planets_detail_phone.png)
 ![Scores](/screenshots/planets_home_tablet.png)
