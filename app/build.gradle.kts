@@ -74,7 +74,6 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
 
-
     // Logging Interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
@@ -95,6 +94,12 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
+    // For Mockk
+    testImplementation("io.mockk:mockk:1.12.5")
+
+    // For Kotest
+    testImplementation("io.kotest:kotest-assertions-core:5.4.2")
+//    testApi "org.jetbrains.kotlin:kotlin-test"
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
