@@ -33,6 +33,7 @@ class PlanetListUseCaseTest {
 
     @Before
     fun setup() {
+        mapper = PlanetMapper()
         planetsListUseCase = PlanetsListUseCase(dataRepository, mapper)
     }
 
