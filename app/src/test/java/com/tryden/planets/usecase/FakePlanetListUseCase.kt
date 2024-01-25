@@ -21,7 +21,7 @@ import org.junit.Test
  * This is the unit test class to test PlanetListUseCase.
  */
 @ExperimentalCoroutinesApi
-class PlanetListUseCaseTest {
+class FakePlanetListUseCase {
 
     lateinit var planetsListUseCase: PlanetsListUseCase
     lateinit var mapper: PlanetMapper
