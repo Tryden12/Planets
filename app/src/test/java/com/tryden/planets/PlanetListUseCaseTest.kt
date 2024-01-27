@@ -1,4 +1,4 @@
-package com.tryden.planets.usecase
+package com.tryden.planets
 
 import com.tryden.planets.data.remote.dto.PlanetDto
 import com.tryden.planets.data.repository.DataRepositoryImpl
@@ -21,7 +21,7 @@ import org.junit.Test
  * This is the unit test class to test PlanetListUseCase.
  */
 @ExperimentalCoroutinesApi
-class FakePlanetListUseCase {
+class PlanetListUseCaseTest {
 
     lateinit var planetsListUseCase: PlanetsListUseCase
     lateinit var mapper: PlanetMapper
